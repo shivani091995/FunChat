@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(express.json()) //for parsing application/json
 
 app.use("/api/auth", authRoutes)
-console.log("Auth routes registered");
+
 app.use("/api/messages", messageRoutes)
 
 app.listen(5000, ()=>{

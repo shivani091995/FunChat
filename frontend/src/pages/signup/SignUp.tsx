@@ -1,6 +1,33 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import GenderCheckbox from "./GenderCheckbox";
 
 
 const SignUp = () => {
+
+  const [inputs, setInputs] = useState({
+		fullName: "",
+		username: "",
+		password: "",
+		confirmPassword: "",
+		gender: "",
+	});
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    //await signup(inputs);
+    
+  }
+
+  const handleCheckboxChange = (gender: "male" | "female") => {
+		setInputs({ ...inputs, gender });
+	};
+
+  
+
+
+
+
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-8 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.2)] bg-white/10 backdrop-filter backdrop-blur-md">
@@ -11,12 +38,14 @@ const SignUp = () => {
           </span>
         </h1>
 
-        <form className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <label className="flex items-center text-white/90 font-medium pl-2">
               Full Name
             </label>
             <input
+              value={inputs.fullName}
+              onChange={(e) => setInputs({...inputs, fullName: e.target.value})}
               type="text"
               placeholder="Enter your full name"
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
@@ -35,6 +64,8 @@ const SignUp = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
+                value={inputs.username}
+							onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
             />
           </div>
 
@@ -48,6 +79,8 @@ const SignUp = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
+                value={inputs.password}
+							onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
             />
           </div>
 
@@ -61,10 +94,12 @@ const SignUp = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
+                value={inputs.confirmPassword}
+							onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
             />
           </div>
 
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <label className="flex items-center text-white/90 font-medium pl-2">
               Gender
             </label>
@@ -88,7 +123,8 @@ const SignUp = () => {
                 <span className="text-white">Female</span>
               </label>
             </div>
-          </div>
+          </div> */}
+          <GenderCheckbox selectedGender={inputs.gender} onCheckboxChange={handleCheckboxChange} />
 
           <div className="flex flex-col space-y-4">
             <button
@@ -101,13 +137,13 @@ const SignUp = () => {
               Sign Up
             </button>
 
-            <a 
-              href="#" 
+            <Link 
+              to={'/login'}
               className="text-center text-white/70 hover:text-purple-400 
                 transition-colors duration-300 text-sm"
             >
               Already have an account? Login
-            </a>
+            </Link>
           </div>
         </form>
       </div>

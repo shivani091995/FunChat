@@ -1,32 +1,27 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import GenderCheckbox from "./GenderCheckbox";
-
+import useSignup from "../../hooks/useSignup";
 
 const SignUp = () => {
-
   const [inputs, setInputs] = useState({
-		fullName: "",
-		username: "",
-		password: "",
-		confirmPassword: "",
-		gender: "",
-	});
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    gender: "",
+  });
+
+  const { loading, signup } = useSignup();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    //await signup(inputs);
-    
-  }
+    signup(inputs);
+  };
 
   const handleCheckboxChange = (gender: "male" | "female") => {
-		setInputs({ ...inputs, gender });
-	};
-
-  
-
-
-
+    setInputs({ ...inputs, gender });
+  };
 
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
@@ -45,7 +40,9 @@ const SignUp = () => {
             </label>
             <input
               value={inputs.fullName}
-              onChange={(e) => setInputs({...inputs, fullName: e.target.value})}
+              onChange={(e) =>
+                setInputs({ ...inputs, fullName: e.target.value })
+              }
               type="text"
               placeholder="Enter your full name"
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
@@ -64,8 +61,10 @@ const SignUp = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
-                value={inputs.username}
-							onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+              value={inputs.username}
+              onChange={(e) =>
+                setInputs({ ...inputs, username: e.target.value })
+              }
             />
           </div>
 
@@ -79,8 +78,10 @@ const SignUp = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
-                value={inputs.password}
-							onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+              value={inputs.password}
+              onChange={(e) =>
+                setInputs({ ...inputs, password: e.target.value })
+              }
             />
           </div>
 
@@ -94,8 +95,10 @@ const SignUp = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
-                value={inputs.confirmPassword}
-							onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
+              value={inputs.confirmPassword}
+              onChange={(e) =>
+                setInputs({ ...inputs, confirmPassword: e.target.value })
+              }
             />
           </div>
 
@@ -124,7 +127,10 @@ const SignUp = () => {
               </label>
             </div>
           </div> */}
-          <GenderCheckbox selectedGender={inputs.gender} onCheckboxChange={handleCheckboxChange} />
+          <GenderCheckbox
+            selectedGender={inputs.gender}
+            onCheckboxChange={handleCheckboxChange}
+          />
 
           <div className="flex flex-col space-y-4">
             <button
@@ -133,12 +139,13 @@ const SignUp = () => {
                 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl
                 hover:opacity-90 transform hover:scale-[1.02] transition-all duration-300
                 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+                disabled={loading}
             >
-              Sign Up
+              {loading ? "Loading....." : "Sign Up"}
             </button>
 
-            <Link 
-              to={'/login'}
+            <Link
+              to={"/login"}
               className="text-center text-white/70 hover:text-purple-400 
                 transition-colors duration-300 text-sm"
             >
@@ -151,5 +158,4 @@ const SignUp = () => {
   );
 };
 
-
-export default SignUp
+export default SignUp;

@@ -2,15 +2,25 @@ import Login from "./pages/login/Login";
 import "./App.css";
 import SignUp from "./pages/signup/SignUp";
 import Home from "./pages/home/Home";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useAuthContext } from "./context/AuthContext";
 
 function App() {
+
+  const { authUser, setAuthUser, isLoading } = useAuthContext();
+  console.log(authUser);
+
+
+  if(isLoading){
+    return <h2>Loading. Please Wait!</h2>
+  }
+  
   return (
     <div className='main-container'>
       <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/" element={ authUser ? <Home/> : <Navigate to={'/login'} />} />
+        <Route path="/login" element={!authUser ? <Login/> : <Navigate to={'/'}  />} />
+        <Route path="/signup" element={ !authUser ? <SignUp/> : <Navigate to={'/'} />} />
       </Routes>
     </div>
   );

@@ -8,4 +8,11 @@ export default defineConfig({
   plugins: [react(),
     tailwindcss(),
   ],
+  server: {
+    proxy: {  //if we get a target /api then prefix it with the localhost 5000
+      "/api": {
+        target: "http://localhost:5000",
+      }
+    }
+  }
 })

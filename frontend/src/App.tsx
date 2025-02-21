@@ -4,6 +4,7 @@ import SignUp from "./pages/signup/SignUp";
 import Home from "./pages/home/Home";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthContext } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={!authUser ? <Login/> : <Navigate to={'/'}  />} />
         <Route path="/signup" element={ !authUser ? <SignUp/> : <Navigate to={'/'} />} />
       </Routes>
+      <Toaster />  
     </div>
   );
 }

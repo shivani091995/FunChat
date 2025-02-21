@@ -1,6 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
 
 const Login = () => {
+
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: ""
+  });
+
+  const {loading, login } = useLogin();
+
+  const handleSubmitForm = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(inputs.username, inputs.password)  }
+
+
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-8 rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.2)] bg-white/10 backdrop-filter backdrop-blur-md">
@@ -11,7 +26,7 @@ const Login = () => {
           </span>
         </h1>
 
-        <form className="space-y-6">
+        <form onSubmit={handleSubmitForm} className="space-y-6">
           <div className="space-y-2">
             <label className="flex items-center text-white/90 font-medium pl-2">
               Username
@@ -22,6 +37,8 @@ const Login = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
+                value={inputs.username}
+                onChange={(e) => setInputs({...inputs, username : e.target.value})}
             />
           </div>
 
@@ -35,6 +52,8 @@ const Login = () => {
               className="w-full h-12 px-4 text-lg bg-white/10 border border-white/20 rounded-xl
                 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/30
                 text-white placeholder-white/50 transition-all duration-300"
+                value={inputs.password}
+                onChange={(e) => setInputs({...inputs, password : e.target.value})}
             />
           </div>
 
@@ -45,8 +64,9 @@ const Login = () => {
                 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl
                 hover:opacity-90 transform hover:scale-[1.02] transition-all duration-300
                 focus:outline-none focus:ring-2 focus:ring-purple-500/70"
+                disabled={loading}
             >
-              Login
+              {loading? "Loading..." : "Login"}
             </button>
 
             <Link 

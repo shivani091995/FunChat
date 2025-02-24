@@ -40,13 +40,13 @@ Ensure you have the following installed:
 - [PostgreSQL](https://www.postgresql.org/) (or use NeonDB)
 - [Git](https://git-scm.com/)
 
-### ** Clone the repository**
+### **Clone the repository**
 ```sh
 git clone https://github.com/shivani091995/FunChat.git
 cd FunChat
 ```
 
-### ** Backend Setup**
+### **Backend Setup**
 ```sh
 cd backend
 npm install
@@ -54,7 +54,7 @@ npx prisma migrate dev  # Run database migrations
 npm run dev  # Start the backend server
 ```
 
-### ** Frontend Setup**
+### **Frontend Setup**
 ```sh
 cd ../frontend
 npm install
@@ -69,7 +69,7 @@ JWT_SECRET="your_secret_key"
 CLIENT_URL="http://localhost:5173"
 ```
 
-## 🖥 Usage
+## Usage
 - Run `npm run dev` in both frontend and backend directories.
 - Open `http://localhost:5173` to access FunChat.
 - Create an account, log in, and start chatting in real time.

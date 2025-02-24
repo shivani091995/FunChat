@@ -6,6 +6,12 @@
   --animation-duration: 15s;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  }
+
 /* Main Container Base Styles */
 .main-container {
   padding: var(--padding);

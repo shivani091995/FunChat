@@ -1,50 +1,78 @@
-# React + TypeScript + Vite
+# FunChat - Real-time Chat Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FunChat is a real-time chat application built with modern web technologies, providing a seamless messaging experience with authentication, WebSocket support, and a clean UI.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- 🔐 **Authentication** using JWT (JSON Web Tokens)
+- 💬 **Real-time messaging** powered by Socket.io
+- 📄 **Database** using PostgreSQL with Prisma ORM
+- 🌐 **Backend** built with Node.js & TypeScript
+- 🎨 **Frontend** using React, TypeScript, Tailwind CSS, and Vite
+- 📦 **State management** with Zustand
+- 📌 **Dynamic Avatars** via [avatar.iran.liara.com](https://avatar.iran.liara.com)
+- ☁️ **Deployed on Render** with NeonDB for database hosting
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Tech Stack
+### **Frontend**
+- React + TypeScript
+- Tailwind CSS
+- Zustand for state management
+- Vite for fast development
 
-## Expanding the ESLint configuration
+### **Backend**
+- Node.js + TypeScript
+- Express.js
+- Prisma ORM
+- PostgreSQL (NeonDB)
+- JWT authentication
+- Socket.io for real-time communication
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### **Deployment**
+- **Frontend**: Deployed on Render
+- **Backend**: Deployed on Render
+- **Database**: Hosted on NeonDB
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🔧 Installation & Setup
+### **Prerequisites**
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- [PostgreSQL](https://www.postgresql.org/) (or use NeonDB)
+- [Git](https://git-scm.com/)
+
+### **1️⃣ Clone the repository**
+```sh
+git clone https://github.com/shivani091995/FunChat.git
+cd FunChat
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### **2️⃣ Backend Setup**
+```sh
+cd backend
+npm install
+cp .env.example .env  # Configure your environment variables
+npx prisma migrate dev  # Run database migrations
+npm run dev  # Start the backend server
 ```
+
+### **3️⃣ Frontend Setup**
+```sh
+cd ../frontend
+npm install
+npm run dev  # Start the frontend development server
+```
+
+## 📌 Environment Variables
+Create a `.env` file in the `backend/` directory and configure:
+```env
+DATABASE_URL="your_neon_db_url"
+JWT_SECRET="your_secret_key"
+CLIENT_URL="http://localhost:5173"
+```
+
+## 🖥️ Usage
+- Run `npm run dev` in both frontend and backend directories.
+- Open `http://localhost:5173` to access FunChat.
+- Create an account, log in, and start chatting in real time! 🎉
+
+

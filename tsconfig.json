@@ -4,7 +4,7 @@
 	  "moduleResolution": "NodeNext",
 	  "target": "ES2020",
 	  "rootDir": "./backend/src",
-	  "outDir": "./dist",
+	  "outDir": "./backend/dist",
 	  "strict": true,
 	  "esModuleInterop": true,
 	  "skipLibCheck": true,

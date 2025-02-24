@@ -10,7 +10,7 @@ const MessageWindow = () => {
  
   
   return (
-    <div className="md:min-w-[700px] flex flex-col h-[700px]">
+    <div className="md:min-w-[700px] flex flex-col h-[600px] mt-20">
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (

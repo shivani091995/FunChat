@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuthContext } from "./context/AuthContext";
 import { Toaster } from "react-hot-toast";
+import LoadingScreen from "./components/skeleton/Loading";
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
 
 
   if(isLoading){
-    return <h2>Loading. Please Wait!</h2>
+    return <LoadingScreen/>
   }
   
   return (

@@ -37,7 +37,7 @@ const SingleMessage = ({ message }: { message: MessageType }) => {
         {/* Message Bubble */}
         <div
           className={`px-4 py-2 rounded-lg text-white text-sm md:text-md ${shakeClass}
-            ${fromMe ? "bg-blue-500" : "bg-gray-700"}`}
+            ${fromMe ? "bg-purple-900" : "bg-gray-700"}`}
         >
           {message.body}
         </div>

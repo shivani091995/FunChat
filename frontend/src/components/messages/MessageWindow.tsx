@@ -15,9 +15,9 @@ const MessageWindow = () => {
         <NoChatSelected />
       ) : (
         <>
-          <div className="bg-slate-500 px-4 py-2 mb-2">
-            <span className="text-base">To:</span>{" "}
-            <span className="text-gray-900 font-extrabold">{selectedConversation.fullName}</span>
+          <div className="bg-purple-900 px-4 py-2 mb-2">
+            <span className="text-xl text-white">To: </span>{" "}
+            <span className="text-white text-xl font-semibold">  {selectedConversation.fullName}</span>
           </div>
 
           <div className="flex-1 overflow-auto">

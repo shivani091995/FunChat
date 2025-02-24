@@ -26,7 +26,7 @@ const Messages = () => {
   }, [selectedConversation, socket]);
 
   return (
-    <div className="px-4 flex flex-col">
+    <div className="px-4 flex flex-col overflow-auto">
       {loading && <MessageSkeleton />}
 
       {!loading &&

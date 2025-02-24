@@ -16,7 +16,7 @@ const SingleMessage = ({ message }: { message: MessageType }) => {
   const fromMe = authUser && message?.senderId === authUser?.id;
 
   const img = fromMe ? authUser?.profilePic : selectedConversation?.profilePic;
-  const shakeClass = message.shouldShake ? "animate-shake" : "";
+  const shakeClass = message.shouldShake ? "shake" : "";
 
   return (
     <div

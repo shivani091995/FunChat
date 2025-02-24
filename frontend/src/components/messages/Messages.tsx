@@ -1,41 +1,43 @@
+import { useEffect, useRef } from "react";
 import useGetMessages from "../../hooks/useGetMessages";
 import MessageSkeleton from "../skeleton/MessageSkeleton";
 import SingleMessage from "./SingleMessage";
+import { useSocketContext } from "../../context/SocketContext";
+import useConversation from "../../zustand/useConversation";
+import useListenMessages from "../../hooks/useListenMessages";
 
 const Messages = () => {
   const { loading, messages } = useGetMessages();
+  const { socket } = useSocketContext();
+  const { selectedConversation } = useConversation();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  useListenMessages();
 
-  console.log("Messages:", messages);
+  useEffect(() => {
+    // Scroll to bottom when new messages arrive
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  useEffect(() => {
+    if (socket && selectedConversation) {
+      // Request messages when conversation is selected
+      socket.emit("getMessages", selectedConversation.id);
+    }
+  }, [selectedConversation, socket]);
 
   return (
     <div className="px-4 flex flex-col">
-      {loading ? <MessageSkeleton /> : null}
+      {loading && <MessageSkeleton />}
 
-      {messages && messages.length > 0 ? (
-        messages.map((message) => (
-          <SingleMessage key={message.id} message={message} />
-        ))
-      ) : !loading ? (
-        <p className="text-center text-white">
-          Send a message to start the fun conversation
-        </p>
-      ) : null}
+      {!loading &&
+        messages.map((message) => <SingleMessage key={message.id} message={message} />)}
 
       {!loading && messages.length === 0 && (
-        <p className="text-center text-white">
-          Send a message to start the fun conversation
-        </p>
+        <p className="text-center text-white">Send a message to start the fun conversation</p>
       )}
+      <div ref={messagesEndRef} />
     </div>
   );
 };
 
 export default Messages;
-
-{
-  /* <SingleMessage
-        message="Hello, this is a left message"
-        timestamp="12:34 PM"
-        avatarUrl="https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png"
-      /> */
-}

@@ -131,3 +131,30 @@ export const getMe = async (req:Request, res:Response) => {
 	}
 	
 }
+
+export const deleteUser = async (req: Request, res: Response, next: Function): Promise<void> => {
+  try {
+    const userId = req.params.id;
+
+    // Delete related messages
+    await prisma.message.deleteMany({ where: { senderId: userId } });
+
+    // Delete related conversations
+    await prisma.conversation.deleteMany({ where: { participantsIds: { has: userId } } });
+
+    // Now delete the user
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+
+    if (!user) {
+      res.status(404).json({ error: "User not found" });
+      return;
+    }
+
+    await prisma.user.delete({ where: { id: userId } });
+
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Error in deleteUser controller:", error);
+    next(error);
+  }
+};
